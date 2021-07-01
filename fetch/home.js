@@ -41,7 +41,8 @@ FormLogin.addEventListener("submit" , async (e) =>{
     e.preventDefault()
     document.getElementById("login-alert").innerText = '';
     const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
   
     var urlencoded = new URLSearchParams();
     urlencoded.append("email", document.getElementById('login-email').value);
@@ -60,7 +61,7 @@ FormLogin.addEventListener("submit" , async (e) =>{
         document.getElementById("login-alert").innerText = json.message
     }
     else {
-        localStorage.setItem('token', JSON.stringify(json.token));
+        localStorage.setItem('token', json.token);
         window.location.href = '/';
     }
     FormLogin.reset()
