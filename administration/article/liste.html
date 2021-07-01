@@ -13,7 +13,7 @@
     <!-- meta character set -->
     <meta charset="UTF-8">
     <!-- Site Title -->
-    <title>Pet Shop | Liste des types</title>
+    <title>Pet Shop | Liste des articles</title>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
         <!--
@@ -41,19 +41,19 @@
                             <li><a href="../index.html">Administration</a></li>
                             <li class="menu-has-children"><a href="">Nourriture</a>
                                 <ul>
-                                    <li><a href="../nourriture/liste.html">Liste</a></li>
-                                    <li><a href="../nourriture/ajouter.html">Ajouter</a></li>					              
-                                </ul>
-                            </li>
-                            <li class="menu-has-children  menu-active"><a href="">Type</a>
-                                <ul>
                                     <li><a href="./liste.html">Liste</a></li>
                                     <li><a href="./ajouter.html">Ajouter</a></li>					              
                                 </ul>
                             </li>
+                            <li class="menu-has-children"><a href="">Type</a>
+                                <ul>
+                                    <li><a href="../type/liste.html">Liste</a></li>
+                                    <li><a href="../type/ajouter.html">Ajouter</a></li>					              
+                                </ul>
+                            </li>
                             <li class="menu-has-children"><a href="">Animaux</a>
                                 <ul>
-                                    <li><a href="../animaux/index.html">Liste</a></li>
+                                    <li><a href="../animaux/liste.html">Liste</a></li>
                                     <li><a href="../animaux/ajouter.html">Ajouter</a></li>					              
                                 </ul>
                             </li>
@@ -63,10 +63,10 @@
                                     <li><a href="../accessoire/ajouter.html">Ajouter</a></li>					              
                                 </ul>
                             </li>
-                            <li class="menu-has-children"><a href="">Article</a>
+                            <li class="menu-has-children  menu-active"><a href="">Article</a>
                                 <ul>
-                                    <li><a href="../article/liste.html">Liste</a></li>
-                                    <li><a href="../article/ajouter.html">Ajouter</a></li>					              
+                                    <li><a href="./liste.html">Liste</a></li>
+                                    <li><a href="./ajouter.html">Ajouter</a></li>					              
                                 </ul>
                             </li>
                         </ul>
@@ -82,9 +82,9 @@
                 <div class="row d-flex align-items-center justify-content-center">
                     <div class="about-content col-lg-12">
                         <h1 class="text-white">
-                            Liste des types			
+                            Liste des nourritures			
                         </h1>	
-                        <p class="text-white link-nav"><a href="../index.html"> Administration</a> <span class="lnr lnr-arrow-right"></span> <a href=""> Type</a> <span class="lnr lnr-arrow-right"></span> <a href=""> Liste</a></p>
+                        <p class="text-white link-nav"><a href="../index.html"> Administration</a> <span class="lnr lnr-arrow-right"></span> <a href="liste.html"> Nourriture</a> <span class="lnr lnr-arrow-right"></span> <a href=""> Liste</a></p>
                     </div>	
                 </div>
             </div>
@@ -94,6 +94,7 @@
 
         <div class="whole-wrap">
             <div class="container">
+                <p id="text-al" style="text-align: center;font-size: 50px;color: red;line-height: 50px;"></p>
                 <div class="section-top-border">
                     <div class="progress-table-wrap">
                         <div class="progress-table" id="table-food">
@@ -105,11 +106,11 @@
         </div>
     
 
+
         <div id="content_loader">
             <span class="waite"></span>
             <div id="loader"></div>
         </div>
-
 
         <script src="../../js/vendor/jquery-2.2.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -123,6 +124,6 @@
         <script src="../../js/owl.carousel.min.js"></script>						
         <script src="../../js/jquery.nice-select.min.js"></script>								
         <script src="../../js/main.js"></script>
-        <script src="../../fetch/type/list.js"></script>	
+        <script src="../../fetch/nourriture/list.js"></script>	
     </body>
 </html>

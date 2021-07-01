@@ -3,9 +3,11 @@ let path = window.location.search
 let splitUrl = path.split("=")
 
 let id = splitUrl[1]
-let nom = document.getElementById("nom")
+let age = document.getElementById("age")
 let prix = document.getElementById("prix")
-let description = document.getElementById("description")
+let race = document.getElementById("race")
+let poids = document.getElementById("poids")
+
 let button = document.getElementById("button-edit-food")
 let alerte = document.getElementById("alerte")
 const Form = document.getElementById("edit-food")
@@ -14,21 +16,9 @@ let loader = document.getElementById("content_loader")
 
 const fetchData = async() =>{
 
-    const req =  await fetch("http://127.0.0.1:5000/nourriture/"+id)
-    const json = await req.json()
-    if(json.statusCode == 200){
-        const reqType =  await fetch("http://127.0.0.1:5000/type")
-        const jsonType = await reqType.json()
-    
-        insertData(json , jsonType.data)
-    }else{
-        Form.style.display = "none"
-        loader.style.display = "none"
-        document.getElementById("text-al").innerHTML = `${json.message}<br> Erreur ${json.statusCode}`
-    }
-   
-  
-  
+    const reqType =  await fetch("http://127.0.0.1:5000/type")
+    const jsonType = await reqType.json()
+    insertData(jsonType.data)
 } 
 
 
@@ -40,20 +30,18 @@ Form.addEventListener("submit" , (e) =>{
   
     if(current.innerHTML != "Choisir un type"){
 
-        button.setAttribute("disabled" , true)
-
         const data = {
-            nom : nom.value, 
+            race : race.value, 
             prix : Number(prix.value),
-            description : description.value,
-            type : current.innerHTML
+            age : Number(prix.age),
+            type : current.innerHTML,
+            poids: Number(poids.value)
         }
         alerte.style.color = "initial"
         alerte.innerHTML = ""
        
         sendData(data)
         .then((res) =>{
-          console.log(res)
             if(res.statusCode != 201){
                 alerte.style.color = "red"
                 alerte.innerHTML = res.message
@@ -79,12 +67,12 @@ Form.addEventListener("submit" , (e) =>{
 
 const sendData = async(data) =>{
 
-    const response = await fetch("http://127.0.0.1:5000/nourriture/"+id+"/edit" , {
+    const response = await fetch("http://127.0.0.1:5000/animaux/" , {
         headers: {
           "Content-Type" : "application/x-www-form-urlencoded",
           //"authorization": ,
         },
-        method: 'PUT',
+        method: 'POST',
         body: JSON.stringify(data)
     })
     return response.json()
@@ -92,22 +80,13 @@ const sendData = async(data) =>{
 
 
 
-const insertData = (foodDataJson , typeDataJson) =>{
-    nom.value = foodDataJson.data.nom
-    description.value = foodDataJson.data.description
-    prix.value = foodDataJson.data.prix
-
-
-    let $select = `<div class="nice-select" tabindex="0"><span class="current">${ foodDataJson.data.type ? foodDataJson.data.type.nom : "Choisir un type"}</span>`
+const insertData = (typeDataJson) =>{
+    
+    let $select = `<div class="nice-select" tabindex="0"><span class="current">Choisir un type</span>`
     let $option = '<ul class="list">'
     
     typeDataJson.forEach(element => {
-        if(foodDataJson.data.type.nom == element.nom){
-            $option += `<li data-value="${element.nom}" class="option" selected>${element.nom}</li>`
-        }else{
-            $option += `<li data-value="${element.nom}" class="option">${element.nom}</li>`
-        }
-     
+        $option += `<li data-value="${element.nom}" class="option">${element.nom}</li>`
     });
 
     $option += "</ul>"
