@@ -1,10 +1,13 @@
 let loader = document.getElementById("content_loader")
 let tableContainer = document.getElementById("table-food")
+let alerte = document.getElementById("text-al")
+
+
 
 
 const getData = async() =>{
 
-    const req =  await fetch("http://127.0.0.1:5000/animaux")
+    const req =  await fetch(`${URI}/animaux`)
     const json = await req.json()
 
 
@@ -31,6 +34,7 @@ const getData = async() =>{
 
         tableContainer.innerHTML = content.join('')
         loader.style.display = "none"
+        deleteItem()
     }else{
         loader.style.display = "none"
         tableContainer.innerHTML = `<p style="text-align:center">${json.message}</p>`
@@ -42,3 +46,38 @@ const getData = async() =>{
 
 
 getData()
+
+
+
+
+
+const deleteItem = () =>{
+    let list = document.querySelectorAll(".delete-food")
+      list.forEach( element => {
+          element.addEventListener("click" , async(e) =>{
+              e.preventDefault()
+              loader.style.display = "block"
+              var requestOptions = {
+                  method: 'DELETE',
+                  redirect: 'follow'
+                };
+                
+              const req = await  fetch(`${URI}/animaux/${element.dataset.id}`, requestOptions)
+              const json = await req.json()
+  
+              loader.style.display = "none"
+  
+              alerte.innerText = json.message
+  
+              if(json.statusCode == 201){
+                  setTimeout(() => {
+                      getData()
+                      alerte.innerText = ""  
+                  }, 2000);
+            
+              }
+               
+          })
+      });
+  }
+  

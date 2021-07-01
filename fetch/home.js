@@ -1,6 +1,6 @@
 const getData = async() =>{
 
-    const req =  await fetch("http://127.0.0.1:5000/animaux/last")
+    const req =  await fetch(`${URI}/animaux/last`)
     const json = await req.json()
    
     let container = document.getElementById("section-last-pet")

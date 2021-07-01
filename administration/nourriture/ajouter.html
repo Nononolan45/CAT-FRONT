@@ -99,12 +99,12 @@
 				<div class="container">
                     <div class="alert-msg" style="text-align: center;margin:20px 0;" id="alerte"></div>
 
-                    <form class="form-area " id="new-food"  method="post" class="contact-form text-right">
+                    <form class="form-area" id="form"  method="post" class="contact-form text-right">
                         <div class="row">	
                             <div class="col-lg-6 form-group">
                                
                                 <label for="nom">Nom</label>
-                                <input name="nom"  placeholder="Nom" class="common-input mb-20 form-control" required="" type="text" id="nom">
+                                <input name="nom" class="common-input mb-20 form-control" required="" type="text" id="nom">
                             
                                 <label for="prix">Prix</label>
                                 <input name="prix"  class="common-input mb-20 form-control" required="" type="number"  step=".01" id="prix">
@@ -115,8 +115,8 @@
                             </div>
                             <div class="col-lg-6 form-group">
                                 <label for="prix">Description</label>
-                                <textarea class="common-textarea form-control" name="description" placeholder="Description"  required="" id="description"></textarea>				
-                                <div class="mt-2">
+                                <textarea class="common-textarea form-control" name="description"  required="" id="description"></textarea>				
+                                <div class="mt-3">
                                     <button class="genric-btn primary" style="float: right;" type="submit" id="button-new-food">Créer</button>											
                                 </div> 
                             </div>
@@ -151,6 +151,7 @@
         <script src="../../js/owl.carousel.min.js"></script>						
         <script src="../../js/jquery.nice-select.min.js"></script>								
         <script src="../../js/main.js"></script>
+        <script src="../../config.js"></script>
         <script src="../../fetch/nourriture/new.js"></script>	
     </body>
 </html>

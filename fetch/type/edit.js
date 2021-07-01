@@ -11,16 +11,24 @@ let loader = document.getElementById("content_loader")
 
 
 const fetchData = async() =>{
-    const req =  await fetch("http://127.0.0.1:5000/type/"+id)
-    const json = await req.json()
 
-    if(json.statusCode == 200){
-        nom.value = json.data.nom
-        loader.style.display = "none"
+    if(id != ""){
+        const req =  await fetch(`${URI}/type/${id}`)
+        const json = await req.json()
+
+        if(json.statusCode == 200){
+            nom.value = json.data.nom
+            loader.style.display = "none"
+        }else{
+            Form.style.display = "none"
+            document.getElementById("text-al").innerHTML = `${json.message}<br> Erreur ${json.statusCode}`
+            loader.style.display = "none"
+        }
+
     }else{
         Form.style.display = "none"
-        document.getElementById("text-al").innerHTML = `${json.message}<br> Erreur ${json.statusCode}`
         loader.style.display = "none"
+        document.getElementById("text-al").innerHTML = 'Not Found<br> Errors 404'
     }
    
   
@@ -30,37 +38,32 @@ const fetchData = async() =>{
 
 Form.addEventListener("submit" , (e) =>{
     e.preventDefault() 
-    sendData(nom.value)
-    .then((res) =>{
-    
-        if(res.statusCode != 201){
-            alerte.style.color = "red"
-            alerte.innerHTML = res.message
-        }else{
-            alerte.style.color = "initial"
-            alerte.innerHTML = res.message
-        }
-    })
-    .catch((error)=>{
-        alerte.style.color = "red"
-        alerte.innerHTML = "Erreur serveur."
-    })
- 
+    sendData()
+    loader.style.display = "block"
 })
 
 
-const sendData = async(data) =>{
 
-    const response = await fetch("http://127.0.0.1:5000/type/"+id+"/edit" , {
-        headers: {
-          "Content-Type" : "application/x-www-form-urlencoded",
-          //"authorization": ,
-        },
-        method: 'PUT',
-        body: JSON.stringify(data)
-    })
-    return response.json()
+const sendData = async() =>{
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+  
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("nom", nom.value)
+  
+    var requestOptions = {
+      method: 'PUT',
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: 'follow'
+    };
+  
+    const response = await fetch(`${URI}/type/${id}/edit`, requestOptions)
+    const json = await response.json()
+    alerte.innerText = json.message
+    loader.style.display = "none"
 }
+
 
 
 fetchData()

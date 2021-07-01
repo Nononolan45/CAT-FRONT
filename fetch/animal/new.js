@@ -15,9 +15,9 @@ let loader = document.getElementById("content_loader")
 
 
 const fetchData = async() =>{
-
-    const reqType =  await fetch("http://127.0.0.1:5000/type")
+    const reqType =  await fetch(`${URI}/type`)
     const jsonType = await reqType.json()
+    loader.style.display = "block"
     insertData(jsonType.data)
 } 
 
@@ -27,37 +27,17 @@ Form.addEventListener("submit" , (e) =>{
     e.preventDefault()
 
     let current = document.querySelector(".current")
-  
-    if(current.innerHTML != "Choisir un type"){
+    loader.style.display = "block"
 
-        const data = {
-            race : race.value, 
-            prix : Number(prix.value),
-            age : Number(prix.age),
-            type : current.innerHTML,
-            poids: Number(poids.value)
-        }
+    if(current.innerHTML != "Choisir un type"){
         alerte.style.color = "initial"
         alerte.innerHTML = ""
-       
-        sendData(data)
-        .then((res) =>{
-            if(res.statusCode != 201){
-                alerte.style.color = "red"
-                alerte.innerHTML = res.message
-            }else{
-                alerte.style.color = "initial"
-                alerte.innerHTML = res.message
-            }
-        })
-        .catch((error)=>{
-            alerte.style.color = "red"
-            alerte.innerHTML = "Erreur serveur."
-        })
+        sendData(current.innerHTML)
 
     }else{
         alerte.style.color = "red"
         alerte.innerHTML = "Veuillez sélectionner un type"
+        loader.style.display = "none"
     }
 
  
@@ -65,18 +45,34 @@ Form.addEventListener("submit" , (e) =>{
 })
 
 
-const sendData = async(data) =>{
 
-    const response = await fetch("http://127.0.0.1:5000/animaux/" , {
-        headers: {
-          "Content-Type" : "application/x-www-form-urlencoded",
-          //"authorization": ,
-        },
-        method: 'POST',
-        body: JSON.stringify(data)
-    })
-    return response.json()
+const sendData = async(type) =>{
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+  
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("race", race.value)
+    urlencoded.append("prix", prix.value)
+    urlencoded.append("type", type)
+    urlencoded.append("poids", poids.value)
+    urlencoded.append("age", age.value)
+  
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: 'follow'
+    };
+  
+    const response = await fetch(`${URI}/animaux/new`, requestOptions)
+    const json = await response.json()
+    alerte.innerText = json.message
+    Form.reset()
+    loader.style.display = "none"
 }
+
+
+
 
 
 

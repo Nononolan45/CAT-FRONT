@@ -13,19 +13,28 @@ let loader = document.getElementById("content_loader")
 
 const fetchData = async() =>{
 
-    const req =  await fetch("http://127.0.0.1:5000/accessoire/"+id)
-    const json = await req.json()
-    if(json.statusCode == 200){
-        const reqType =  await fetch("http://127.0.0.1:5000/type")
-        const jsonType = await reqType.json()
-    
-        insertData(json , jsonType.data)
+    if(id != ""){
+
+        const req =  await fetch(`${URI}/accessoire/${id}`)
+        const json = await req.json()
+
+        if(json.statusCode == 200){
+            const reqType =  await fetch(`${URI}/type`)
+            const jsonType = await reqType.json()
+            
+            insertData(json , jsonType.data)
+
+
+        }else{
+            Form.style.display = "none"
+            loader.style.display = "none"
+            document.getElementById("text-al").innerHTML = `${json.message}<br> Erreur ${json.statusCode}`
+        }
     }else{
         Form.style.display = "none"
         loader.style.display = "none"
-        document.getElementById("text-al").innerHTML = `${json.message}<br> Erreur ${json.statusCode}`
+        document.getElementById("text-al").innerHTML = 'Not Found<br> Errors 404'
     }
-   
   
   
 } 
@@ -36,37 +45,18 @@ Form.addEventListener("submit" , (e) =>{
     e.preventDefault()
 
     let current = document.querySelector(".current")
-  
+    loader.style.display = "block"
     if(current.innerHTML != "Choisir un type"){
-
-        button.setAttribute("disabled" , true)
-
-        const data = {
-            nom : nom.value, 
-            prix : Number(prix.value),
-            type : current.innerHTML
-        }
+  
         alerte.style.color = "initial"
         alerte.innerHTML = ""
        
-        sendData(data)
-        .then((res) =>{
-            if(res.statusCode != 201){
-                alerte.style.color = "red"
-                alerte.innerHTML = res.message
-            }else{
-                alerte.style.color = "initial"
-                alerte.innerHTML = res.message
-            }
-        })
-        .catch((error)=>{
-            alerte.style.color = "red"
-            alerte.innerHTML = "Erreur serveur."
-        })
+        sendData(current.innerHTML)
 
     }else{
         alerte.style.color = "red"
         alerte.innerHTML = "Veuillez sélectionner un type"
+        loader.style.display = "none"
     }
 
  
@@ -74,17 +64,29 @@ Form.addEventListener("submit" , (e) =>{
 })
 
 
-const sendData = async(data) =>{
 
-    const response = await fetch("http://127.0.0.1:5000/accessoire/"+id+"/edit" , {
-        headers: {
-          "Content-Type" : "application/x-www-form-urlencoded",
-          //"authorization": ,
-        },
-        method: 'PUT',
-        body: JSON.stringify(data)
-    })
-    return response.json()
+
+const sendData = async(type) =>{
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+  
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("nom", nom.value)
+    urlencoded.append("prix", prix.value)
+    urlencoded.append("type", type)
+  
+
+    var requestOptions = {
+      method: 'PUT',
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: 'follow'
+    };
+  
+    const response = await fetch(`${URI}/accessoire/${id}/edit`, requestOptions)
+    const json = await response.json()
+    alerte.innerText = json.message
+    loader.style.display = "none"
 }
 
 
@@ -93,12 +95,11 @@ const insertData = (DataJson , typeDataJson) =>{
     nom.value = DataJson.data.nom
     prix.value = DataJson.data.prix
 
-
-    let $select = `<div class="nice-select" tabindex="0"><span class="current">${ DataJson.data.type ? DataJson.data.type.nom : "Choisir un type"}</span>`
+    let $select = `<div class="nice-select" tabindex="0"><span class="current">${ DataJson.data.type ? DataJson.data.type : "Choisir un type"}</span>`
     let $option = '<ul class="list">'
     
     typeDataJson.forEach(element => {
-        if(DataJson.data.type.nom == element.nom){
+        if(DataJson.data.type == element.nom){
             $option += `<li data-value="${element.nom}" class="option" selected>${element.nom}</li>`
         }else{
             $option += `<li data-value="${element.nom}" class="option">${element.nom}</li>`
