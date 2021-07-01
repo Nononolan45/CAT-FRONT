@@ -81,11 +81,11 @@ const sendData = async () =>{
 
   const response = await fetch(`${URI}/article/${id}/edit`, requestOptions)
   const json = await response.json()
-  alerte.innerText = json.message
+  if(json.message){
+      alerte.innerText = json.message
+  }
   Form.reset()
   
-  loader.style.display = "none"
-
   
 }
 

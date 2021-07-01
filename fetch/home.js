@@ -1,4 +1,13 @@
 const getData = async() =>{
+    const a = document.getElementById("log");
+    if(localStorage.getItem('token')){
+        a.innerHTML = "Déconnexion"
+        a.href = "javascript:void(0);"
+        a.onclick = () => {
+            localStorage.removeItem('token');
+            window.location.href = '/'
+        }
+    }
 
     const req =  await fetch(`${URI}/animaux/last`)
     const json = await req.json()
@@ -22,4 +31,39 @@ const getData = async() =>{
 
 
 getData()
+
+let alerte = document.getElementById("alerte")
+const FormLogin = document.getElementById("login");
+
+
+
+FormLogin.addEventListener("submit" , async (e) =>{
+    e.preventDefault()
+    document.getElementById("login-alert").innerText = '';
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+  
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("email", document.getElementById('login-email').value);
+    urlencoded.append("motDePasse", document.getElementById('login-password').value);
+    
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: 'follow'
+    };
+  
+    const response = await fetch(`${URI}/login`, requestOptions)
+    const json = await response.json()
+    if(json.message){
+        document.getElementById("login-alert").innerText = json.message
+    }
+    else {
+        localStorage.setItem('token', JSON.stringify(json.token));
+        window.location.href = '/';
+    }
+    FormLogin.reset()
+})
+
 
