@@ -5,7 +5,6 @@ let splitUrl = path.split("=")
 let id = splitUrl[1]
 let nom = document.getElementById("nom")
 let prix = document.getElementById("prix")
-let description = document.getElementById("description")
 let button = document.getElementById("button-edit-food")
 let alerte = document.getElementById("alerte")
 const Form = document.getElementById("edit-food")
@@ -14,7 +13,7 @@ let loader = document.getElementById("content_loader")
 
 const fetchData = async() =>{
 
-    const req =  await fetch("http://127.0.0.1:5000/nourriture/"+id)
+    const req =  await fetch("http://127.0.0.1:5000/accessoire/"+id)
     const json = await req.json()
     if(json.statusCode == 200){
         const reqType =  await fetch("http://127.0.0.1:5000/type")
@@ -45,7 +44,6 @@ Form.addEventListener("submit" , (e) =>{
         const data = {
             nom : nom.value, 
             prix : Number(prix.value),
-            description : description.value,
             type : current.innerHTML
         }
         alerte.style.color = "initial"
@@ -53,7 +51,6 @@ Form.addEventListener("submit" , (e) =>{
        
         sendData(data)
         .then((res) =>{
-          console.log(res)
             if(res.statusCode != 201){
                 alerte.style.color = "red"
                 alerte.innerHTML = res.message
@@ -79,7 +76,7 @@ Form.addEventListener("submit" , (e) =>{
 
 const sendData = async(data) =>{
 
-    const response = await fetch("http://127.0.0.1:5000/nourriture/"+id+"/edit" , {
+    const response = await fetch("http://127.0.0.1:5000/accessoire/"+id+"/edit" , {
         headers: {
           "Content-Type" : "application/x-www-form-urlencoded",
           //"authorization": ,
@@ -92,17 +89,16 @@ const sendData = async(data) =>{
 
 
 
-const insertData = (foodDataJson , typeDataJson) =>{
-    nom.value = foodDataJson.data.nom
-    description.value = foodDataJson.data.description
-    prix.value = foodDataJson.data.prix
+const insertData = (DataJson , typeDataJson) =>{
+    nom.value = DataJson.data.nom
+    prix.value = DataJson.data.prix
 
 
-    let $select = `<div class="nice-select" tabindex="0"><span class="current">${ foodDataJson.data.type ? foodDataJson.data.type.nom : "Choisir un type"}</span>`
+    let $select = `<div class="nice-select" tabindex="0"><span class="current">${ DataJson.data.type ? DataJson.data.type.nom : "Choisir un type"}</span>`
     let $option = '<ul class="list">'
     
     typeDataJson.forEach(element => {
-        if(foodDataJson.data.type.nom == element.nom){
+        if(DataJson.data.type.nom == element.nom){
             $option += `<li data-value="${element.nom}" class="option" selected>${element.nom}</li>`
         }else{
             $option += `<li data-value="${element.nom}" class="option">${element.nom}</li>`

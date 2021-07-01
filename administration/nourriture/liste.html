@@ -13,7 +13,7 @@
     <!-- meta character set -->
     <meta charset="UTF-8">
     <!-- Site Title -->
-    <title>Pet Shop | Administration</title>
+    <title>Pet Shop | Liste des nourritures</title>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
         <!--
@@ -41,8 +41,8 @@
                             <li><a href="../index.html">Administration</a></li>
                             <li class="menu-has-children menu-active"><a href="">Nourriture</a>
                                 <ul>
-                                    <li><a href="liste.html">Liste</a></li>
-                                    <li><a href="ajouter.html">Ajouter</a></li>					              
+                                    <li><a href="./liste.html">Liste</a></li>
+                                    <li><a href="./ajouter.html">Ajouter</a></li>					              
                                 </ul>
                             </li>
                             <li class="menu-has-children"><a href="">Type</a>
@@ -53,20 +53,20 @@
                             </li>
                             <li class="menu-has-children"><a href="">Animaux</a>
                                 <ul>
-                                    <li><a href="../animaux/index.html">Liste</a></li>
+                                    <li><a href="../animaux/liste.html">Liste</a></li>
                                     <li><a href="../animaux/ajouter.html">Ajouter</a></li>					              
                                 </ul>
                             </li>
                             <li class="menu-has-children"><a href="">Accessoires</a>
                                 <ul>
-                                    <li><a href="">Liste</a></li>
-                                    <li><a href="">Ajouter</a></li>					              
+                                    <li><a href="../accessoire/liste.html">Liste</a></li>
+                                    <li><a href="../accessoire/ajouter.html">Ajouter</a></li>					              
                                 </ul>
                             </li>
                             <li class="menu-has-children"><a href="">Article</a>
                                 <ul>
-                                    <li><a href="">Liste</a></li>
-                                    <li><a href="">Ajouter</a></li>					              
+                                    <li><a href="../article/liste.html">Liste</a></li>
+                                    <li><a href="../article/ajouter.html">Ajouter</a></li>					              
                                 </ul>
                             </li>
                         </ul>
@@ -84,7 +84,7 @@
                         <h1 class="text-white">
                             Liste des nourritures			
                         </h1>	
-                        <p class="text-white link-nav"><a href="index.html">Accueil </a>  <span class="lnr lnr-arrow-right"></span>  <a href="../index.html"> Administration</a> <span class="lnr lnr-arrow-right"></span>  <a href=""> Liste</a></p>
+                        <p class="text-white link-nav"><a href="../index.html"> Administration</a> <span class="lnr lnr-arrow-right"></span> <a href="liste.html"> Nourriture</a> <span class="lnr lnr-arrow-right"></span> <a href=""> Liste</a></p>
                     </div>	
                 </div>
             </div>
@@ -94,6 +94,7 @@
 
         <div class="whole-wrap">
             <div class="container">
+                <p id="text-al" style="text-align: center;font-size: 50px;color: red;line-height: 50px;"></p>
                 <div class="section-top-border">
                     <div class="progress-table-wrap">
                         <div class="progress-table" id="table-food">
@@ -106,6 +107,10 @@
     
 
 
+        <div id="content_loader">
+            <span class="waite"></span>
+            <div id="loader"></div>
+        </div>
 
         <script src="../../js/vendor/jquery-2.2.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

@@ -13,7 +13,7 @@
     <!-- meta character set -->
     <meta charset="UTF-8">
     <!-- Site Title -->
-    <title>Pet Shop | Liste des types</title>
+    <title>Pet Shop | Éditer</title>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
         <!--
@@ -45,22 +45,22 @@
                                     <li><a href="../nourriture/ajouter.html">Ajouter</a></li>					              
                                 </ul>
                             </li>
-                            <li class="menu-has-children  menu-active"><a href="">Type</a>
+                            <li class="menu-has-children"><a href="">Type</a>
                                 <ul>
-                                    <li><a href="./liste.html">Liste</a></li>
-                                    <li><a href="./ajouter.html">Ajouter</a></li>					              
+                                    <li><a href="../type/liste.html">Liste</a></li>
+                                    <li><a href="../type/ajouter.html">Ajouter</a></li>					              
                                 </ul>
                             </li>
                             <li class="menu-has-children"><a href="">Animaux</a>
                                 <ul>
-                                    <li><a href="../animaux/index.html">Liste</a></li>
+                                    <li><a href="../animaux/liste.html">Liste</a></li>
                                     <li><a href="../animaux/ajouter.html">Ajouter</a></li>					              
                                 </ul>
                             </li>
-                            <li class="menu-has-children"><a href="">Accessoires</a>
+                            <li class="menu-has-children menu-active"><a href="">Accessoires</a>
                                 <ul>
-                                    <li><a href="../accessoire/liste.html">Liste</a></li>
-                                    <li><a href="../accessoire/ajouter.html">Ajouter</a></li>					              
+                                    <li><a href="./liste.html">Liste</a></li>
+                                    <li><a href="./ajouter.html">Ajouter</a></li>					              
                                 </ul>
                             </li>
                             <li class="menu-has-children"><a href="">Article</a>
@@ -82,33 +82,56 @@
                 <div class="row d-flex align-items-center justify-content-center">
                     <div class="about-content col-lg-12">
                         <h1 class="text-white">
-                            Liste des types			
+                            Édition	
                         </h1>	
-                        <p class="text-white link-nav"><a href="../index.html"> Administration</a> <span class="lnr lnr-arrow-right"></span> <a href=""> Type</a> <span class="lnr lnr-arrow-right"></span> <a href=""> Liste</a></p>
+                        <p class="text-white link-nav"><a href="../index.html"> Administration</a> <span class="lnr lnr-arrow-right"></span> <a href="./liste.html"> Accessoires</a> <span class="lnr lnr-arrow-right"></span> <a href=""> Édition</a></p>
                     </div>	
                 </div>
             </div>
         </section>
-        <!-- End banner Area -->				  
+        <!-- End banner Area -->
+        
+        
+
+        	
+			<!-- Start contact-page Area -->
+			<section class="contact-page-area section-gap">
+				<div class="container">
+                    <div class="alert-msg" style="text-align: center;margin:20px 0;" id="alerte"></div>
+                    <p id="text-al" style="text-align: center;font-size: 50px;color: red;line-height: 50px;"></p>
+                    <form class="form-area " id="edit-food"  method="post" class="contact-form text-right">
+                    
+                        <label for="nom">Nom</label>
+                        <input name="nom"  class="common-input mb-20 form-control" required="" type="text" id="nom">
+                    
+                        <label for="prix">Prix</label>
+                        <input name="prix"  class="common-input mb-20 form-control" required="" type="number"  step=".01" id="prix">
+
+                        <label for="prix">Type</label>
+                        <div class="form-select" id="default-select"></div>
+
+                    
+                
+                        <div class="mt-2">
+                            <button class="genric-btn primary" style="float: right;" type="submit" id="button-edit-food">Mettre à jour</button>											
+                        </div> 
+                    
+                    
+                    </form>	
+					
+				</div>	
+			</section>
+			<!-- End contact-page Area -->
 
 
-        <div class="whole-wrap">
-            <div class="container">
-                <div class="section-top-border">
-                    <div class="progress-table-wrap">
-                        <div class="progress-table" id="table-food">
-                        
-                        </div>
-                    </div>
-                </div>
+
+            <div id="content_loader">
+                <span class="waite"></span>
+                <div id="loader"></div>
             </div>
-        </div>
+ 
     
 
-        <div id="content_loader">
-            <span class="waite"></span>
-            <div id="loader"></div>
-        </div>
 
 
         <script src="../../js/vendor/jquery-2.2.4.min.js"></script>
@@ -123,6 +146,6 @@
         <script src="../../js/owl.carousel.min.js"></script>						
         <script src="../../js/jquery.nice-select.min.js"></script>								
         <script src="../../js/main.js"></script>
-        <script src="../../fetch/type/list.js"></script>	
+        <script src="../../fetch/accessoire/edit.js"></script>	
     </body>
 </html>

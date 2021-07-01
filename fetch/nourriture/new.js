@@ -1,33 +1,17 @@
 let containerSelect = document.getElementById("default-select")
-let path = window.location.search 
-let splitUrl = path.split("=")
 
-let id = splitUrl[1]
 let nom = document.getElementById("nom")
 let prix = document.getElementById("prix")
 let description = document.getElementById("description")
-let button = document.getElementById("button-edit-food")
-let alerte = document.getElementById("alerte")
-const Form = document.getElementById("edit-food")
+const Form = document.getElementById("new-food")
 let loader = document.getElementById("content_loader")
 
 
 const fetchData = async() =>{
+    const reqType =  await fetch("http://127.0.0.1:5000/type")
+    const jsonType = await reqType.json()
 
-    const req =  await fetch("http://127.0.0.1:5000/nourriture/"+id)
-    const json = await req.json()
-    if(json.statusCode == 200){
-        const reqType =  await fetch("http://127.0.0.1:5000/type")
-        const jsonType = await reqType.json()
-    
-        insertData(json , jsonType.data)
-    }else{
-        Form.style.display = "none"
-        loader.style.display = "none"
-        document.getElementById("text-al").innerHTML = `${json.message}<br> Erreur ${json.statusCode}`
-    }
-   
-  
+    insertData(jsonType.data)
   
 } 
 
@@ -39,8 +23,6 @@ Form.addEventListener("submit" , (e) =>{
     let current = document.querySelector(".current")
   
     if(current.innerHTML != "Choisir un type"){
-
-        button.setAttribute("disabled" , true)
 
         const data = {
             nom : nom.value, 
@@ -77,14 +59,15 @@ Form.addEventListener("submit" , (e) =>{
 })
 
 
+
 const sendData = async(data) =>{
 
-    const response = await fetch("http://127.0.0.1:5000/nourriture/"+id+"/edit" , {
+    const response = await fetch("http://127.0.0.1:5000/nourriture/new" , {
         headers: {
           "Content-Type" : "application/x-www-form-urlencoded",
           //"authorization": ,
         },
-        method: 'PUT',
+        method: 'POST',
         body: JSON.stringify(data)
     })
     return response.json()
@@ -92,22 +75,13 @@ const sendData = async(data) =>{
 
 
 
-const insertData = (foodDataJson , typeDataJson) =>{
-    nom.value = foodDataJson.data.nom
-    description.value = foodDataJson.data.description
-    prix.value = foodDataJson.data.prix
-
-
-    let $select = `<div class="nice-select" tabindex="0"><span class="current">${ foodDataJson.data.type ? foodDataJson.data.type.nom : "Choisir un type"}</span>`
+const insertData = (typeDataJson) =>{
+ 
+    let $select = `<div class="nice-select" tabindex="0"><span class="current">Choisir un type</span>`
     let $option = '<ul class="list">'
     
     typeDataJson.forEach(element => {
-        if(foodDataJson.data.type.nom == element.nom){
-            $option += `<li data-value="${element.nom}" class="option" selected>${element.nom}</li>`
-        }else{
-            $option += `<li data-value="${element.nom}" class="option">${element.nom}</li>`
-        }
-     
+        $option += `<li data-value="${element.nom}" class="option">${element.nom}</li>`
     });
 
     $option += "</ul>"
@@ -116,6 +90,7 @@ const insertData = (foodDataJson , typeDataJson) =>{
     $select += '</div>'
 
     containerSelect.innerHTML = $select
+
     loader.style.display = "none"
     
 }
