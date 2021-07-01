@@ -1,5 +1,6 @@
 
-let nom = document.getElementById("nom")
+let titre = document.getElementById("titre")
+let contenu = document.getElementById("contenu")
 let alerte = document.getElementById("alerte")
 const Form = document.getElementById("new-food")
 
@@ -22,6 +23,9 @@ const fetchData = async () =>{
 
   var urlencoded = new URLSearchParams();
   urlencoded.append("nom", nom.value);
+  urlencoded.append("contenu", contenu.value);
+
+  //urlencoded.append("user_id", id);
 
   var requestOptions = {
     method: 'POST',
@@ -30,7 +34,7 @@ const fetchData = async () =>{
     redirect: 'follow'
   };
 
-  const response = await fetch(`${URI}/type/new`, requestOptions)
+  const response = await fetch(`${URI}/article/new`, requestOptions)
   const json = await response.json()
   alerte.innerText = json.message
   Form.reset()

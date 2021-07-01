@@ -1,14 +1,12 @@
 const getData = async() =>{
 
-    const reqType =  await fetch("http://127.0.0.1:5000/type")
+    const reqType =  await fetch(`${URI}/type`)
     const jsonType = await reqType.json()
 
-    const req =  await fetch("http://127.0.0.1:5000/animaux")
+    const req =  await fetch(`${URI}/animaux`)
     const json = await req.json()
 
    
-
-
     let nav = document.getElementById('pills-tab')
     let container = document.getElementById("pills-tabContent")
 

@@ -4,73 +4,59 @@ let nom = document.getElementById("nom")
 let prix = document.getElementById("prix")
 const Form = document.getElementById("new-food")
 let loader = document.getElementById("content_loader")
-
+let alerte = document.getElementById("alerte")
 
 const fetchData = async() =>{
-    const reqType =  await fetch("http://127.0.0.1:5000/type")
+    const reqType =  await fetch(`${URI}/type`)
     const jsonType = await reqType.json()
-
+    loader.style.display = "block"
     insertData(jsonType.data)
-  
 } 
 
 
 
 Form.addEventListener("submit" , (e) =>{
     e.preventDefault()
-
+    loader.style.display = "block"
     let current = document.querySelector(".current")
-  
     if(current.innerHTML != "Choisir un type"){
-
-        const data = {
-            nom : nom.value, 
-            prix : Number(prix.value),
-            type : current.innerHTML
-        }
         alerte.style.color = "initial"
-        alerte.innerHTML = ""
-       
-        sendData(data)
-        .then((res) =>{
-         
-            if(res.statusCode != 201){
-                alerte.style.color = "red"
-                alerte.innerHTML = res.message
-            }else{
-                alerte.style.color = "initial"
-                alerte.innerHTML = res.message
-            }
-        })
-        .catch((error)=>{
-            alerte.style.color = "red"
-            alerte.innerHTML = "Erreur serveur."
-        })
-
+        alerte.innerHTML = "" 
+        sendData(current.innerHTML)
     }else{
         alerte.style.color = "red"
         alerte.innerHTML = "Veuillez sélectionner un type"
+        loader.style.display = "none"
     }
-
- 
- 
 })
 
 
 
-const sendData = async(data) =>{
+const sendData = async (type) =>{
 
-    const response = await fetch("http://127.0.0.1:5000/accessoire/new" , {
-        headers: {
-          "Content-Type" : "application/x-www-form-urlencoded",
-          //"authorization": ,
-        },
-        method: 'POST',
-        body: JSON.stringify(data)
-    })
-    return response.json()
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+  
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("nom", nom.value);
+    urlencoded.append("prix", prix.value);
+    urlencoded.append("type", type);
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: 'follow'
+    };
+  
+    const response = await fetch(`${URI}/accessoire/new`, requestOptions)
+    const json = await response.json()
+    
+    loader.style.display = "none"
+    alerte.innerText = json.message
+    Form.reset()
+    
 }
-
 
 
 const insertData = (typeDataJson) =>{
