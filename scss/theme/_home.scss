@@ -75,7 +75,7 @@
 		border:1px solid transparent;
 		&:hover{
 			border:1px solid $white;
-			background:transparent;
+			background:#14a7b4;
 			color:$white;
 		}	
 }
@@ -270,7 +270,7 @@
 	
 	.primary-btn{
 		margin-top:25px;
-		background-color:$black;
+		background-color:#338990;
 		border:1px solid transparent;
 		text-transform:capitalize;
 		border-radius:0px;
@@ -306,7 +306,7 @@
 /*-------- Start review Area -------------*/
 
 .review-area{
-	background:url(../img/review-bg.jpg) center;
+	background:url(../img/top-banner.jpg) center;
 	background-size:cover;
 	color:$white;
 	h4{
@@ -534,7 +534,7 @@
 		}
 
 		.click-btn{
-			background-color: #d1ab7f;
+			background-color: #338990;
 			color: #fff;
 			border-radius: 0;
 			border-top-left-radius: 0px;
@@ -647,9 +647,6 @@
 
 .about-generic-area {
 	background: $white;
-	.border-top-generic {
-
-	}
 	p {
 		margin-bottom: 20px;
 	}
@@ -671,6 +668,8 @@
 
 
 /*-------- Start Common Page Style For  -------------*/
+
+a{color:#338990;}
 
 .link-nav{
 	margin-top:10px;

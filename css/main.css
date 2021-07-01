@@ -1065,17 +1065,20 @@ h1, h2, h3, h4, h5, h6 {
   min-width: 800px;
 }
 .progress-table .serial {
-  width: 11.83%;
+  width: 30%;
   padding-left: 30px;
 }
 .progress-table .country {
-  width: 28.07%;
+  width: 40%;
 }
 .progress-table .visit {
-  width: 19.74%;
+  width: 10%;
+}
+.progress-table .action {
+  width: 10%;
 }
 .progress-table .percentage {
-  width: 40.36%;
+  width: 10%;
   padding-right: 50px;
 }
 .progress-table .table-head {
@@ -1136,13 +1139,22 @@ h1, h2, h3, h4, h5, h6 {
 .single-gallery-image {
   margin-top: 30px;
   background-repeat: no-repeat !important;
-  background-position: center center !important;
   background-size: cover !important;
-  height: 200px;
+  height: 300px;
+  color: white;
+  text-transform: uppercase;
+  position: relative;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
+}
+.single-gallery-image span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
 }
 .single-gallery-image:hover {
   opacity: 0.8;
@@ -1746,10 +1758,12 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
 }
 .form-select .nice-select {
-  border: none;
   border-radius: 0px;
   height: 40px;
-  background: #f9f9ff;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
   padding-left: 45px;
   padding-right: 40px;
   width: 100%;
@@ -1792,6 +1806,14 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
+* {
+  scroll-behavior: smooth;
+}
+
+.menu-active a {
+  color: #338990 !important;
+}
+
 .header-top {
   font-size: 12px;
   padding: 15px;
@@ -2253,7 +2275,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 .primary-btn.squire:hover {
   border: 1px solid #fff;
-  background: transparent;
+  background: #14a7b4;
   color: #fff;
 }
 
@@ -2436,7 +2458,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 .about-video-left .primary-btn {
   margin-top: 25px;
-  background-color: #222;
+  background-color: #338990;
   border: 1px solid transparent;
   text-transform: capitalize;
   border-radius: 0px;
@@ -2471,7 +2493,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 /*-------- End about-video Area -------------*/
 /*-------- Start review Area -------------*/
 .review-area {
-  background: url(../img/review-bg.jpg) center;
+  background: url(../img/top-banner.jpg) center;
   background-size: cover;
   color: #fff;
 }
@@ -2686,7 +2708,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   color: red;
 }
 .single-footer-widget .click-btn {
-  background-color: #d1ab7f;
+  background-color: #338990;
   color: #fff;
   border-radius: 0;
   border-top-left-radius: 0px;
@@ -2817,6 +2839,10 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 /*---------- End Generic Page -------------*/
 /*-------- Start Common Page Style For  -------------*/
+a {
+  color: #338990;
+}
+
 .link-nav {
   margin-top: 10px;
   margin-bottom: 0px;
