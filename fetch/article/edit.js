@@ -20,14 +20,11 @@ const fetchData = async() =>{
         const json = await req.json()
 
         loader.style.display = "none"
-
+        console.log(json)
         if(json.statusCode == 200){
 
-            //check user in session @Todo
-
-            //
             titre.value = json.data.titre
-            contenu.value = json.data.value
+            contenu.value = json.data.contenu
 
 
 
@@ -62,18 +59,20 @@ Form.addEventListener("submit" , async (e) =>{
 
 
 const sendData = async () =>{
+    alerte.innerText = ""
 
   var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+      myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    myHeaders.append("Authorization", `Bearer ${localStorage.getItem('token')}`);
+
 
   var urlencoded = new URLSearchParams();
-  urlencoded.append("nom", nom.value);
+  urlencoded.append("titre", titre.value);
   urlencoded.append("contenu", contenu.value);
-
-  //urlencoded.append("user_id", id);
+  urlencoded.append("user_id", localStorage.getItem('user_id'));
 
   var requestOptions = {
-    method: 'POST',
+    method: 'PUT',
     headers: myHeaders,
     body: urlencoded,
     redirect: 'follow'
@@ -81,11 +80,11 @@ const sendData = async () =>{
 
   const response = await fetch(`${URI}/article/${id}/edit`, requestOptions)
   const json = await response.json()
-  alerte.innerText = json.message
-  Form.reset()
+  if(json.message){
+      alerte.innerText = json.message
+      loader.style.display = "none"
+  }
   
-  loader.style.display = "none"
-
   
 }
 

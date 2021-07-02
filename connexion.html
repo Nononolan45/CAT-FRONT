@@ -70,14 +70,14 @@
         <!-- Start contact-page Area -->
         <section class="contact-page-area section-gap">
             <div class="container">
-                <form class="form-area " id=""  method="post" class="contact-form">
+                <form class="form-area " id="login"  method="post" class="contact-form">
                         <div class="form-group">
                             <h1>Connectez-vous</h1>
-                            <input name="email" placeholder="Votre adresse email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Votre adresse email'" class="common-input mb-20 form-control" required="" type="email">
-                            <input name="password" placeholder="Votre mot de passe" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" class="common-input mb-20 form-control" required="" type="tpassword">
+                            <input id="login-email" name="email" placeholder="Votre adresse email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Votre adresse email'" class="common-input mb-20 form-control" required="" type="email">
+                            <input id="login-password" name="password" placeholder="Votre mot de passe" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" class="common-input mb-20 form-control" required="" type="password">
                         </div>
                         
-                        <div class="alert-msg" style="text-align: left;"></div>
+                        <div id="login-alert" class="alert-msg" style="text-align: left;"></div>
                         <button class="genric-btn primary" style="float: right;">Se connecter</button>											
                     </div>
                 </form>	
@@ -92,16 +92,20 @@
         <!-- Start contact-page Area -->
         <section class="contact-page-area section-gap">
             <div class="container">
-                <form class="form-area " id=""  method="post" class="contact-form">
+                <form class="form-area " id="inscription"  method="post" class="contact-form">
                         <div class="form-group">
                             <h2>Vous n'avez pas encore de compte ?</h2>
-                            <input name="pseudo" placeholder="Votre pseudo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Votre pseudo'" class="common-input mb-20 form-control" required type="text">
-                            <input name="email" placeholder="Votre adresse email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Votre adresse email'" class="common-input mb-20 form-control" required type="email">
-                            <input name="adresse" placeholder="Votre adresse"  onfocus="this.placeholder = ''" onblur="this.placeholder = 'Votre adresse'" class="common-input mb-20 form-control"  type="text">
-                            <input name="password" placeholder="Votre mot de passe" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Votre mot de passe'" class="common-input mb-20 form-control" required type="tpassword">
-                        </div>
+                            <input id="pseudo" name="pseudo" placeholder="Votre pseudo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Votre pseudo'" class="common-input mb-20 form-control" required type="text">
+                            <input id="email" name="email" placeholder="Votre adresse email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Votre adresse email'" class="common-input mb-20 form-control" required type="email">
+                            <input id="adresse" name="adresse" placeholder="Votre adresse"  onfocus="this.placeholder = ''" onblur="this.placeholder = 'Votre adresse'" class="common-input mb-20 form-control"  type="text">
+                            <input id="password" name="password" placeholder="Votre mot de passe" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Votre mot de passe'" class="common-input mb-20 form-control" required type="password">
+                            <select id="role" name="role"  placeholder="Vos roles" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Votre mot de passe'" class="common-input mb-20 form-control" multiple="multiple">
+                            <option value="admin">Administrateur</option>
+                            <option value="editeur">Auteur</option>
+                            </select>
+                         </div>
                         
-                        <div class="alert-msg" style="text-align: left;"></div>
+                        <div id="alerte-inscription" class="alert-msg" style="text-align: left;"></div>
                         <button class="genric-btn primary" style="float: right;">Créer un compte</button>											
                     </div>
                 </form>	
@@ -174,5 +178,7 @@
         <script src="js/jquery.nice-select.min.js"></script>								
         <script src="js/main.js"></script>
         <script src="fetch/home.js"></script>	
+        <script src="config.js"></script>
+
     </body>
 </html>

@@ -46,7 +46,9 @@ Form.addEventListener("submit" , (e) =>{
 
 const sendData = async() =>{
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    myHeaders.append("Authorization", `Bearer ${localStorage.getItem('token')}`);
+
   
     var urlencoded = new URLSearchParams();
     urlencoded.append("nom", nom.value)
