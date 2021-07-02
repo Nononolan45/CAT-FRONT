@@ -30,8 +30,35 @@ const getData = async() =>{
 
 }
 
+const getArticles = async () =>  {
+
+    const req =  await fetch(`${URI}/article`)
+    const json = await req.json()
+
+    let container = document.getElementById("list-article")
+    let $html = ""
+
+    if(json.data.length > 0){
+        json.data.forEach(element => {
+            $html += `<div class="single-blog col-lg-4 col-md-4">							
+            <a href="#">
+                <h4>${element.titre}
+                Kitchen Finding Reliable Sellers</h4>
+            </a>
+            <p>
+        ${element.contenu}    </p>
+        </div>`    
+        });
+        container.innerHTML = $html
+
+    }else{
+        container.innerHTML = "<p>Liste vide</p>"
+    }
+    
+}
 
 getData()
+getArticles()
 
 let alerte = document.getElementById("alerte")
 const FormLogin = document.getElementById("login");
@@ -67,6 +94,51 @@ FormLogin.addEventListener("submit" , async (e) =>{
         window.location.href = '/';
     }
     FormLogin.reset()
+})
+
+
+
+let alerteInscription = document.getElementById("alerte-inscription")
+const FormInscription = document.getElementById("inscription");
+
+
+
+FormInscription.addEventListener("submit" , async (e) =>{
+    e.preventDefault()
+    document.getElementById("login-alert").innerText = '';
+    const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+  
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("email", document.getElementById('email').value);
+    urlencoded.append("motDePasse", document.getElementById('password').value);
+    urlencoded.append("adresse", document.getElementById('adresse').value);
+    urlencoded.append("pseudo", document.getElementById('pseudo').value);
+    const select = document.getElementById('role');
+    const  selected = [...select.options]
+                    .filter(option => option.selected)
+                    .map(option => option.value);
+    console.log(selected)
+    urlencoded.append("role", document.getElementById('role').options.filter(x => x.selected));
+
+
+
+    
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: 'follow'
+    };
+  
+    const response = await fetch(`${URI}/user/new`, requestOptions)
+    const json = await response.json()
+    if(json.message){
+        document.getElementById("login-alert").innerText = json.message
+    }
+
+    FormInscription.reset()
 })
 
 

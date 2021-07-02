@@ -115,11 +115,7 @@ FormInscription.addEventListener("submit" , async (e) =>{
     urlencoded.append("motDePasse", document.getElementById('password').value);
     urlencoded.append("adresse", document.getElementById('adresse').value);
     urlencoded.append("pseudo", document.getElementById('pseudo').value);
-    const select = document.getElementById('role');
-
-    urlencoded.append("role", [...select.options]
-    .filter(option => option.selected)
-    .map(option => option.value));
+    urlencoded.append("role", document.getElementById('role').value);
 
 
 
@@ -134,7 +130,7 @@ FormInscription.addEventListener("submit" , async (e) =>{
     const response = await fetch(`${URI}/user/new`, requestOptions)
     const json = await response.json()
     if(json.message){
-        document.getElementById("alerte-inscription").innerText = json.message
+        document.getElementById("login-alert").innerText = json.message
     }
 
     FormInscription.reset()

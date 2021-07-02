@@ -30,12 +30,12 @@ const getData = async() =>{
 
 }
 
-const getArticles = () =>  {
+const getArticles = async () =>  {
 
     const req =  await fetch(`${URI}/article`)
     const json = await req.json()
 
-    let container = document.getElementById("liste-article")
+    let container = document.getElementById("list-article")
     let $html = ""
 
     if(json.data.length > 0){
@@ -94,6 +94,50 @@ FormLogin.addEventListener("submit" , async (e) =>{
         window.location.href = '/';
     }
     FormLogin.reset()
+})
+
+
+
+let alerteInscription = document.getElementById("alerte-inscription")
+const FormInscription = document.getElementById("inscription");
+
+
+
+FormInscription.addEventListener("submit" , async (e) =>{
+    e.preventDefault()
+    document.getElementById("login-alert").innerText = '';
+    const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+  
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("email", document.getElementById('email').value);
+    urlencoded.append("motDePasse", document.getElementById('password').value);
+    urlencoded.append("adresse", document.getElementById('adresse').value);
+    urlencoded.append("pseudo", document.getElementById('pseudo').value);
+    const select = document.getElementById('role');
+
+    urlencoded.append("role", [...select.options]
+    .filter(option => option.selected)
+    .map(option => option.value));
+
+
+
+    
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: 'follow'
+    };
+  
+    const response = await fetch(`${URI}/user/new`, requestOptions)
+    const json = await response.json()
+    if(json.message){
+        document.getElementById("login-alert").innerText = json.message
+    }
+
+    FormInscription.reset()
 })
 
 
