@@ -24,7 +24,7 @@ const fetchData = async () =>{
 
 
   var urlencoded = new URLSearchParams();
-  urlencoded.append("titre", titre.value);
+  urlencoded.append("nom", nom.value);
   urlencoded.append("contenu", contenu.value);
   urlencoded.append("user_id", localStorage.getItem('user_id'));
 
