@@ -19,7 +19,7 @@ const getData = async() =>{
             <div class="visit">${element.auteur.pseudo}</div>
             <div class="percentage">
             <a href="edit.html?id=${element.id}">Éditer</a>
-            <a href="" class="delete-food" data-id="${element.id}">Supprimer</a>
+            <a href="#" onclick="deleteArticle(${element.id})" class="delete-food" data-id="${element.id}">Supprimer</a>
             </div></div>`
         });
 
@@ -36,6 +36,10 @@ const getData = async() =>{
 
 }
 
+const deleteArticle = async (id) => {
+    await fetch(`${URI}/article/${id}`,{method: 'DELETE', headers : {'Authorization': `Bearer ${localStorage.getItem('token')}`}});
+    window.location.reload();
+}
 
 
 
