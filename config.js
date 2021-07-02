@@ -18,8 +18,8 @@ if(localStorage.getItem('token')){
 
 isConnect()
 
-let path = window.location
-if(path.pathname == "/administration/" && !localStorage.getItem('token') ){
+let chemin = window.location
+if(chemin.pathname == "/administration/" && !localStorage.getItem('token') ){
     window.location = "/"
 }
 
