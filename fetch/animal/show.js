@@ -12,7 +12,7 @@ function addPanier($data) {
     sessionStorage.setItem(`animal ${id}`, $data)}
     
 const getData = async() =>{
-    const req =  await fetch(`http://127.0.0.1:5000/animaux/${id}`)
+    const req =  await fetch(`${URI}/animaux/${id}`)
     const json = await req.json()
     addPanier(JSON.stringify(json.data))
     poids.innerText = `Poids : ${json.data.poids}`

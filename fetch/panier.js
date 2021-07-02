@@ -40,13 +40,7 @@ const replaceData = () =>{
                     <p class="mb-2 text-muted text-uppercase small" id="poids">POIDS : ${element.poids}</p>
                     <p class="mb-3 text-muted text-uppercase small" id="age">AGE: ${element.age} mois</p>
                     </div>
-                    <div>
-                    <div class="def-number-input number-input safari_only mb-0 w-100">
-                        
-                        <input class="quantity" min="0" name="quantity" value="1" type="number">
-                        
-                    </div>
-                    </div>
+                  
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <p class="mb-0"><span><strong id="prix">${element.prix} €</strong></span></p class="mb-0">

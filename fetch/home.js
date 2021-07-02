@@ -1,15 +1,5 @@
 const getData = async() =>{
-    const a = document.getElementById("log");
-    if(localStorage.getItem('token')){
-        a.innerHTML = "Déconnexion"
-        a.href = "javascript:void(0);"
-        a.onclick = () => {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user_id')
-            window.location.href = '/'
-        }
-    }
-
+ 
     const req =  await fetch(`${URI}/animaux/last`)
     const json = await req.json()
    
