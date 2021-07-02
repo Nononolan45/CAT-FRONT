@@ -35,7 +35,7 @@ const getArticles = async () =>  {
     const req =  await fetch(`${URI}/article`)
     const json = await req.json()
 
-    let container = document.getElementById("list-article")
+    let container = document.getElementById("liste-article")
     let $html = ""
 
     if(json.data.length > 0){
