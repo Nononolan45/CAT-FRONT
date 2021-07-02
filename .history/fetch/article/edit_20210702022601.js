@@ -59,7 +59,6 @@ Form.addEventListener("submit" , async (e) =>{
 
 
 const sendData = async () =>{
-    alerte.innerText = ""
 
   var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -83,7 +82,10 @@ const sendData = async () =>{
   if(json.message){
       alerte.innerText = json.message
       loader.style.display = "none"
+
   }
+  window.location.href = `/article/${id}`
+
   
   
 }

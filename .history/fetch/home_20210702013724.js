@@ -5,7 +5,6 @@ const getData = async() =>{
         a.href = "javascript:void(0);"
         a.onclick = () => {
             localStorage.removeItem('token');
-            localStorage.removeItem('user_id')
             window.location.href = '/'
         }
     }
@@ -43,6 +42,7 @@ FormLogin.addEventListener("submit" , async (e) =>{
     document.getElementById("login-alert").innerText = '';
     const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    myHeaders.append("Authorization", `Bearer ${localStorage.getItem('token')}`);
 
   
     var urlencoded = new URLSearchParams();
@@ -62,8 +62,7 @@ FormLogin.addEventListener("submit" , async (e) =>{
         document.getElementById("login-alert").innerText = json.message
     }
     else {
-        localStorage.setItem('token', json.token);
-        localStorage.setItem('user_id', json.data)
+        localStorage.setItem('token', JSON.stringify(json.token));
         window.location.href = '/';
     }
     FormLogin.reset()

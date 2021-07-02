@@ -5,7 +5,6 @@ const getData = async() =>{
         a.href = "javascript:void(0);"
         a.onclick = () => {
             localStorage.removeItem('token');
-            localStorage.removeItem('user_id')
             window.location.href = '/'
         }
     }
@@ -63,7 +62,6 @@ FormLogin.addEventListener("submit" , async (e) =>{
     }
     else {
         localStorage.setItem('token', json.token);
-        localStorage.setItem('user_id', json.data)
         window.location.href = '/';
     }
     FormLogin.reset()

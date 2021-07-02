@@ -1,14 +1,4 @@
 const getData = async() =>{
-    const a = document.getElementById("log");
-    if(localStorage.getItem('token')){
-        a.innerHTML = "Déconnexion"
-        a.href = "javascript:void(0);"
-        a.onclick = () => {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user_id')
-            window.location.href = '/'
-        }
-    }
 
     const req =  await fetch(`${URI}/animaux/last`)
     const json = await req.json()
@@ -43,6 +33,7 @@ FormLogin.addEventListener("submit" , async (e) =>{
     document.getElementById("login-alert").innerText = '';
     const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    myHeaders.append("Authorization", `Bearer ${localStorage.getItem('token')}`);
 
   
     var urlencoded = new URLSearchParams();
@@ -62,9 +53,8 @@ FormLogin.addEventListener("submit" , async (e) =>{
         document.getElementById("login-alert").innerText = json.message
     }
     else {
-        localStorage.setItem('token', json.token);
-        localStorage.setItem('user_id', json.data)
-        window.location.href = '/';
+        localStorage.setItem('token', JSON.stringify(json.token));
+        window.location.reload;
     }
     FormLogin.reset()
 })

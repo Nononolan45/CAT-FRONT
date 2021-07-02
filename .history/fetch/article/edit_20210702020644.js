@@ -59,7 +59,6 @@ Form.addEventListener("submit" , async (e) =>{
 
 
 const sendData = async () =>{
-    alerte.innerText = ""
 
   var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -69,7 +68,6 @@ const sendData = async () =>{
   var urlencoded = new URLSearchParams();
   urlencoded.append("titre", titre.value);
   urlencoded.append("contenu", contenu.value);
-  urlencoded.append("user_id", localStorage.getItem('user_id'));
 
   var requestOptions = {
     method: 'PUT',
@@ -82,8 +80,8 @@ const sendData = async () =>{
   const json = await response.json()
   if(json.message){
       alerte.innerText = json.message
-      loader.style.display = "none"
   }
+  Form.reset()
   
   
 }

@@ -5,7 +5,6 @@ const getData = async() =>{
         a.href = "javascript:void(0);"
         a.onclick = () => {
             localStorage.removeItem('token');
-            localStorage.removeItem('user_id')
             window.location.href = '/'
         }
     }

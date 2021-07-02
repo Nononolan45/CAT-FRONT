@@ -10,7 +10,13 @@ let id = splitUrl[1]
 
 
 
-
+function jwtDecode(t) {
+    let token = {};
+    token.raw = t;
+    token.header = JSON.parse(window.atob(t.split('.')[0]));
+    token.payload = JSON.parse(window.atob(t.split('.')[1]));
+    return (token)
+  }
 
 const fetchData = async() =>{
     loader.style.display = "block"
@@ -59,7 +65,6 @@ Form.addEventListener("submit" , async (e) =>{
 
 
 const sendData = async () =>{
-    alerte.innerText = ""
 
   var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -69,8 +74,7 @@ const sendData = async () =>{
   var urlencoded = new URLSearchParams();
   urlencoded.append("titre", titre.value);
   urlencoded.append("contenu", contenu.value);
-  urlencoded.append("user_id", localStorage.getItem('user_id'));
-
+console.log(jwtDecode(localStorage.getItem("token")))
   var requestOptions = {
     method: 'PUT',
     headers: myHeaders,
@@ -82,8 +86,8 @@ const sendData = async () =>{
   const json = await response.json()
   if(json.message){
       alerte.innerText = json.message
-      loader.style.display = "none"
   }
+  Form.reset()
   
   
 }
